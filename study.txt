@@ -1,0 +1,11 @@
+1. VIM Config:
+a). Create ctags:
+    ctags -R --exclude="out" --exclude="cts" --exclude="developers" --exclude="development" --exclude="docs" --exclude="flashing-files" --exclude="ndk" --exclude="oem-release" --exclude="prebuilts" --exclude="sdk" --exclude="*git" --exclude=".repo" --languages=Java,C,C++,Make,Sh
+
+b). Build filetag for lookupfile:
+(echo '!'"_TAG_FILE_SORTED        2       /2=foldcase/";(find . \( -name out -o -name cts -o -name developers -o -name development -o -name docs -o -name flashing-files -o -name ndk -o -name oem-release -o -name prebuilts -o -name sdk -o -name .repo -o -wholename '*\/.git' \) -prune -o -regex '.*\.\(java\|cpp\|c\|cc\|h\|hh\|mk\|Makefile\|sh\|prop\|rc\|aidl\)' -type f -printf "%f\t%p\t1\n" | sort -f)) > ./filenametags
+
+
+2.Gerrit cmd:
+a). format patch:
+    git log --pretty=format:"%h           %ad        %s%d        [%an]" --date=short --author=liuzhigang | tee liuzhigang.txt
