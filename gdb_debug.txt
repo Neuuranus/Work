@@ -1,0 +1,19 @@
+1. 得到进程id: 
+#ps | grep installd
+2.  a). 调试已运行的进程:
+    #gdbserver :5039 --attach installd
+    b).  或者调试新的进程:
+    #gdbserver :5039 installd(or /system/bin/installd)
+3. 用ADB设置转发端口:
+$adb forward tcp:5039 tcp:5039
+4.在android源码目录下：
+$gdb out/target/product/xxx/symbols/system/bin/installd
+5.设置符号表:
+(gdb)set solib-absolute-prefix /home/username/srcname/out/target/product/xxx/symbols
+(gdb)set solib-search-path /home/username/srcname/out/target/product/xxx/symbols/system/lib
+6.连接gdb server:
+(gdb)target remote :5039
+(gdb)shared
+接下来就可以开始调试了
+(gdb)help显示帮助
+
